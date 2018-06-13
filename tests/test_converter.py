@@ -1,6 +1,11 @@
 import pytest
+import allure
 
 
+@allure.feature('Smoke testing')
+@allure.story('Open converter page, '
+              'check the filter states,'
+              'check the operation of basic elements: show result button, quotation popup, print popup')
 @pytest.mark.parametrize('def_testdata',
                          [['100', 'RUB', 'USD', 'card', 'to_account', 'internet_bank', 'no_package', 'current']])
 def test_smoke_check(base, def_testdata):
@@ -30,6 +35,10 @@ def test_smoke_check(base, def_testdata):
     assert base.is_quotation_popup_closed()
 
 
+@allure.feature('Functional testing')
+@allure.story('Open converter page'
+              'Convert amount of currency_1 to currency_2'
+              'Check result')
 def test_currency_exchange_converter(base, testdata):
     base.open_converter_page()
     assert base.is_converter_page_loaded()
@@ -49,6 +58,10 @@ def test_currency_exchange_converter(base, testdata):
     assert base.check_result(testdata[8])
 
 
+@allure.feature('Functional testing')
+@allure.story('Open converter page'
+              'Select "cash" Source'
+              'Check Receiving and Exchange Way filters has been changed')
 @pytest.mark.parametrize('data',
                          [['cash', 'to_account', 'cashless', 'branch_bank', 'internet_bank', 'atm']])
 def test_check_radio_values_for_cash_source(base, data):
