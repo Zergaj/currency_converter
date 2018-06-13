@@ -1,13 +1,14 @@
 from _pytest.fixtures import fixture
 from selenium import webdriver
 from model.application import Application
+import os
 
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome", help="browser type")
     parser.addoption("--base_url", action="store", default="http://www.sberbank.ru/ru/quotes/converter", help="base URL")
     parser.addoption("--path", action="store", default="chromedriver", help="path to browser")
-    parser.addoption("--path_to_test_data", action="store", default=r"C:\test_data.csv", help="path to test data file")
+    parser.addoption("--path_to_test_data", action="store", default=None, help="path to test data file")
 
 
 # MAIN FIXTURES
@@ -27,11 +28,6 @@ def path(request):
 
 
 @fixture(scope="session")
-def path_to_test_data(request):
-    return request.config.getoption("--path_to_test_data")
-
-
-@fixture(scope="session")
 def base(browser_type, base_url, path):
     driver = None
     if browser_type == "firefox":
@@ -46,7 +42,7 @@ def base(browser_type, base_url, path):
 def pytest_generate_tests(metafunc):
     if 'testdata' in metafunc.fixturenames:
         lines = []
-        with open(metafunc.config.getoption('path_to_test_data')) as f:
+        with open(get_path_to_csv(metafunc)) as f:
             try:
                 while True:
                     line = next(f).rstrip('\n').split(',')
@@ -54,3 +50,10 @@ def pytest_generate_tests(metafunc):
             except StopIteration:
                 pass
         metafunc.parametrize('testdata', lines)
+
+
+def get_path_to_csv(metafunc):
+    path_to_csv = metafunc.config.getoption('path_to_test_data')
+    if not path_to_csv:
+        path_to_csv = os.path.join(os.path.realpath('.'), 'test_data.csv')
+    return path_to_csv
