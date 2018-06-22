@@ -79,13 +79,33 @@ class Application(object):
         if self.quotation_change_table.is_close_button_visible():
             self.quotation_change_table.close_button().click()
 
+    @allure.step('Check that the default values are set')
+    def is_default_data_set(self, data):
+        if not self.is_current_amount(data[0]):
+            return False
+        if not self.is_selected_currency_from(data[1]):
+            return False
+        if not self.is_selected_currency_to(data[2]):
+            return False
+        if not self.is_selected_source(data[3]):
+            return False
+        if not self.is_selected_receiving(data[4]):
+            return False
+        if not self.is_selected_exchange_way(data[5]):
+            return False
+        if not self.is_selected_pack_service(data[6]):
+            return False
+        if not self.is_selected_converter_date(data[7]):
+            return False
+        return True
+
     @allure.step('Enter Amount value: {0}')
     def enter_amount_value(self, value):
         if self.converter_page.is_amount_field_visible():
             self.converter_page.amount_field().clear()
             self.converter_page.amount_field().send_keys(value)
 
-    @allure.step('Assert: displayed Amount is {0}')
+    @allure.step('Assert: displayed Amount should be {0}')
     def is_current_amount(self, value):
         return self.converter_page.amount_field().get_attribute('value') == value
 
@@ -97,7 +117,7 @@ class Application(object):
                 currency_from.button().click()
                 currency_from.list_element(value).click()
 
-    @allure.step('Assert: selected Currency to convert from is {0}')
+    @allure.step('Assert: selected Currency to convert from should be {0}')
     def is_selected_currency_from(self, value):
         return self.currency_selector(self.converter_page.currency_from()).current_element().text == value
 
@@ -109,7 +129,7 @@ class Application(object):
                 currency_to.button().click()
                 currency_to.list_element(value).click()
 
-    @allure.step('Assert: selected Currency to convert to is {0}')
+    @allure.step('Assert: selected Currency to convert to should be {0}')
     def is_selected_currency_to(self, value):
         return self.currency_selector(self.converter_page.currency_to()).current_element().text == value
 
@@ -119,7 +139,7 @@ class Application(object):
             if not self.converter_page.source_radio(value).get_attribute('aria-checked'):
                 self.converter_page.source_radio(value).click()
 
-    @allure.step('Assert: selected Source type is {0}')
+    @allure.step('Assert: selected Source type should be {0}')
     def is_selected_source(self, value):
         return self.converter_page.source_radio(value).get_attribute('aria-checked')
 
@@ -129,11 +149,11 @@ class Application(object):
             if not self.converter_page.receiving_radio(value).get_attribute('aria-checked'):
                 self.converter_page.receiving_radio(value).click()
 
-    @allure.step('Assert: selected Receiving type is {0}')
+    @allure.step('Assert: selected Receiving type should be {0}')
     def is_selected_receiving(self, value):
         return self.converter_page.receiving_radio(value).get_attribute('aria-checked')
 
-    @allure.step('Assert: Receiving type {0} is inactive')
+    @allure.step('Assert: Receiving type {0} should be inactive')
     def is_receiving_inactive(self, value):
         return self.converter_page.receiving_radio(value).get_attribute('aria-disabled')
 
@@ -143,11 +163,11 @@ class Application(object):
             if not self.converter_page.exchange_way_radio(value).get_attribute('aria-checked'):
                 self.converter_page.exchange_way_radio(value).click()
 
-    @allure.step('Assert: selected Exchange way is {0}')
+    @allure.step('Assert: selected Exchange way should be {0}')
     def is_selected_exchange_way(self, value):
         return self.converter_page.exchange_way_radio(value).get_attribute('aria-checked')
 
-    @allure.step('Assert: Exchange way {0} is inactive')
+    @allure.step('Assert: Exchange way {0} should be inactive')
     def is_exchange_way_inactive(self, value):
         return self.converter_page.exchange_way_radio(value).get_attribute('aria-disabled')
 
@@ -157,7 +177,7 @@ class Application(object):
             if not self.converter_page.package_radio(value).get_attribute('aria-checked'):
                 self.converter_page.package_radio(value).click()
 
-    @allure.step('Assert: selected Package service is {0}')
+    @allure.step('Assert: selected Package service should be {0}')
     def is_selected_pack_service(self, value):
         return self.converter_page.package_radio(value).get_attribute('aria-checked')
 
@@ -175,11 +195,11 @@ class Application(object):
                         datepicker = self.datepicker(self.converter_page.datepicker())
                         self.select_date(datepicker, year=year, month=month, day=day, hour=hour, minute=minute)
 
-    @allure.step('Assert: selected Converter Date is {0}')
+    @allure.step('Assert: selected Converter Date should be {0}')
     def is_selected_converter_date(self, value):
         return self.converter_page.date_radio(value).get_attribute('aria-checked')
 
-    @allure.step('Assert: result of convertion is {0}')
+    @allure.step('Assert: result of convertion should be {0}')
     def check_result(self, value):
         return self.converter_page.rates_result_to().text == value.replace('.', ',')
 
