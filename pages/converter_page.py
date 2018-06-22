@@ -1,5 +1,4 @@
 from pages.page import Page
-from selenium.webdriver.common.by import By
 
 
 class ConverterPage(Page):
@@ -59,94 +58,94 @@ class ConverterPage(Page):
     yearpicker_item_locator = '//*[@id="select2-drop"]/descendant::div[text()="{year}"]'
 
     def is_filter_header_visible(self):
-        return self.is_element_visible((By.XPATH, self.rates_filter_header_locator))
+        return self.is_element_visible(self.rates_filter_header_locator)
 
     def is_cookie_panel_close_button_visible(self):
-        return self.is_element_visible((By.XPATH, self.cookie_panel_close_button_locator))
+        return self.is_element_visible(self.cookie_panel_close_button_locator)
 
     def is_cookie_panel_close_button_invisible(self):
-        return self.is_element_invisible((By.XPATH, self.cookie_panel_close_button_locator))
+        return self.is_element_invisible(self.cookie_panel_close_button_locator)
 
     def cookie_panel_close_button(self):
-        return self.driver.find_element_by_xpath(self.cookie_panel_close_button_locator)
+        return self.element(self.cookie_panel_close_button_locator)
 
     def show_button(self):
-        return self.driver.find_element_by_xpath(self.show_button_locator)
+        return self.element(self.show_button_locator)
 
     def is_show_button_visible(self):
-        return self.is_element_visible((By.XPATH, self.show_button_locator))
+        return self.is_element_visible(self.show_button_locator)
 
     def is_rates_result_block_visible(self):
-        return self.is_element_visible((By.XPATH, self.rates_result_block_locator))
+        return self.is_element_visible(self.rates_result_block_locator)
 
     def rates_result_to(self):
-        return self.driver.find_element_by_xpath(self.rates_result_to_locator)
+        return self.element(self.rates_result_to_locator)
 
     def print_link(self):
-        return self.driver.find_element_by_xpath(self.print_link_locator)
+        return self.element(self.print_link_locator)
 
     def is_print_link_visible(self):
-        return self.is_element_visible((By.XPATH, self.print_link_locator))
+        return self.is_element_visible(self.print_link_locator)
 
     def quotation_popup_open_link(self):
-        return self.driver.find_element_by_xpath(self.quotation_change_table_link_locator)
+        return self.element(self.quotation_change_table_link_locator)
 
     def is_quotation_popup_open_link_visible(self):
-        return self.is_element_visible((By.XPATH, self.quotation_change_table_link_locator))
+        return self.is_element_visible(self.quotation_change_table_link_locator)
 
     def amount_field(self):
-        return self.driver.find_element_by_xpath(self.amount_field_locator)
+        return self.element(self.amount_field_locator)
 
     def is_amount_field_visible(self):
-        return self.is_element_visible((By.XPATH, self.amount_field_locator))
+        return self.is_element_visible(self.amount_field_locator)
 
     # CURRENCY SELECTORS block
     def is_currency_from_visible(self):
-        return self.is_element_visible((By.XPATH, self.cur_from_locator))
+        return self.is_element_visible(self.cur_from_locator)
 
     def currency_from(self):
-        return self.driver.find_element_by_xpath(self.cur_from_locator)
+        return self.element(self.cur_from_locator)
 
     def is_currency_to_visible(self):
-        return self.is_element_visible((By.XPATH, self.cur_to_locator))
+        return self.is_element_visible(self.cur_to_locator)
 
     def currency_to(self):
-        return self.driver.find_element_by_xpath(self.cur_to_locator)
+        return self.element(self.cur_to_locator)
 
     # FILTERS
     def source_radio(self, value):
-        return self.driver.find_element_by_xpath(self.source[value])
+        return self.element(self.source[value])
 
     def is_source_block_visible(self):
         for i in self.source.values():
-            if not self.is_element_visible((By.XPATH, i)):
+            if not self.is_element_visible(i):
                 return False
         return True
 
     def receiving_radio(self, value):
-        return self.driver.find_element_by_xpath(self.receiving[value])
+        return self.element(self.receiving[value])
 
     def is_receiving_block_visible(self):
         for i in self.receiving.values():
-            if not self.is_element_visible((By.XPATH, i)):
+            if not self.is_element_visible(i):
                 return False
         return True
 
     def exchange_way_radio(self, value):
-        return self.driver.find_element_by_xpath(self.exch_way[value])
+        return self.element(self.exch_way[value])
 
     def is_exchange_way_block_visible(self):
         for i in self.exch_way.values():
-            if not self.is_element_visible((By.XPATH, i)):
+            if not self.is_element_visible(i):
                 return False
         return True
 
     def package_radio(self, value):
-        return self.driver.find_element_by_xpath(self.package[value])
+        return self.element(self.package[value])
 
     def is_package_block_visible(self):
         for i in self.package.values():
-            if not self.is_element_visible((By.XPATH, i)):
+            if not self.is_element_visible(i):
                 return False
         return True
 
@@ -154,34 +153,34 @@ class ConverterPage(Page):
     def date_radio(self, value):
         if value != 'current':
             value = 'selected'
-        return self.driver.find_element_by_xpath(self.date_selector[value])
+        return self.element(self.date_selector[value])
 
     def is_date_block_visible(self):
         for i in self.date_selector.values():
-            if not self.is_element_visible((By.XPATH, i)):
+            if not self.is_element_visible(i):
                 return False
         return True
 
     def is_converter_datepicker_visible(self):
-        return self.is_element_visible((By.XPATH, self.converter_datepicker_locator))
+        return self.is_element_visible(self.converter_datepicker_locator)
 
     def converter_datepicker(self):
-        return self.driver.find_element_by_xpath(self.converter_datepicker_locator)
+        return self.element(self.converter_datepicker_locator)
 
     def converter_datepicker_button(self):
-        return self.driver.find_element_by_xpath(self.converter_datepicker_button_locator)
+        return self.element(self.converter_datepicker_button_locator)
 
     def is_datepicker_visible(self):
-        return self.is_element_visible((By.XPATH, self.datepicker_popup_locator))
+        return self.is_element_visible(self.datepicker_popup_locator)
 
     def datepicker(self):
-        return self.driver.find_element_by_xpath(self.datepicker_popup_locator)
+        return self.element(self.datepicker_popup_locator)
 
     def yearpicker(self):
-        return self.driver.find_element_by_xpath(self.yerapicker_list_locator)
+        return self.element(self.yerapicker_list_locator)
 
     def is_yearpicker_list_visible(self):
-        return self.is_element_visible((By.XPATH, self.yerapicker_list_locator))
+        return self.is_element_visible(self.yerapicker_list_locator)
 
     def yearpicker_item(self, value):
-        return self.driver.find_element_by_xpath(self.yearpicker_item_locator.replace('{year}', value))
+        return self.element(self.yearpicker_item_locator.replace('{year}', value))

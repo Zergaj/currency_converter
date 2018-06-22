@@ -1,5 +1,4 @@
 from pages.page import Page
-from selenium.webdriver.common.by import By
 
 
 class PrintPopup(Page):
@@ -9,13 +8,13 @@ class PrintPopup(Page):
     close_button_locator = '//button[text()="Закрыть"]'
 
     def close_button(self):
-        return self.driver.find_element_by_xpath(self.close_button_locator)
+        return self.element(self.close_button_locator)
 
     def is_close_button_visible(self):
-        return self.is_element_visible((By.XPATH, self.close_button_locator))
+        return self.is_element_visible(self.close_button_locator)
 
     def is_print_popup_visible(self):
-        return self.is_element_visible((By.XPATH, self.opened_print_popup_locator))
+        return self.is_element_visible(self.opened_print_popup_locator)
 
     def is_print_popup_invisible(self):
-        return self.is_element_visible((By.XPATH, self.closed_print_popup_locator))
+        return self.is_element_visible(self.closed_print_popup_locator)
