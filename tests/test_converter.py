@@ -13,14 +13,8 @@ def test_smoke_check(base, def_testdata):
     assert base.is_converter_page_loaded()
     base.close_rules_panel()
 
-    assert base.is_current_amount(def_testdata[0])
-    assert base.is_selected_currency_from(def_testdata[1])
-    assert base.is_selected_currency_to(def_testdata[2])
-    assert base.is_selected_source(def_testdata[3])
-    assert base.is_selected_receiving(def_testdata[4])
-    assert base.is_selected_exchange_way(def_testdata[5])
-    assert base.is_selected_pack_service(def_testdata[6])
-    assert base.is_selected_converter_date(def_testdata[7])
+    assert base.is_default_data_set(def_testdata)
+
     base.press_show_button()
     assert base.is_result_block_appeared()
 
