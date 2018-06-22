@@ -81,23 +81,16 @@ class Application(object):
 
     @allure.step('Check that the default values are set')
     def is_default_data_set(self, data):
-        if not self.is_current_amount(data[0]):
-            return False
-        if not self.is_selected_currency_from(data[1]):
-            return False
-        if not self.is_selected_currency_to(data[2]):
-            return False
-        if not self.is_selected_source(data[3]):
-            return False
-        if not self.is_selected_receiving(data[4]):
-            return False
-        if not self.is_selected_exchange_way(data[5]):
-            return False
-        if not self.is_selected_pack_service(data[6]):
-            return False
-        if not self.is_selected_converter_date(data[7]):
-            return False
-        return True
+        if self.is_current_amount(data[0]) and \
+           self.is_selected_currency_from(data[1]) and \
+           self.is_selected_currency_to(data[2]) and \
+           self.is_selected_source(data[3]) and \
+           self.is_selected_receiving(data[4]) and \
+           self.is_selected_exchange_way(data[5]) and \
+           self.is_selected_pack_service(data[6]) and \
+           self.is_selected_converter_date(data[7]):
+            return True
+        return False
 
     @allure.step('Enter Amount value: {0}')
     def enter_amount_value(self, value):
